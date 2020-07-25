@@ -8,18 +8,25 @@ import 'package:flutter_basic_app/modules/user/screens/signin.dart';
 
 class Route {
   final String _namedRoute;
+  final String _label;
 
-  Route(this._namedRoute);
+  Route(this._namedRoute, [
+    this._label = ''
+  ]);
 
   get namedRoute => _namedRoute;
+  get label => _label;
 }
 
 class Routes {
-  static Route root = Route("/");
-  static Route home = Route("/home");
-  static Route signIn = Route("/signIn");
-  static Route errorNotFound = Route("/not-found");
+  static final Route root = Route("/");
+  static final Route home = Route("/home", "Home");
+  static final Route signIn = Route("/signIn", "Sign In");
+  static final Route errorNotFound = Route("/not-found");
 
+  static final visibleRoutes = <Route>[
+    home, signIn
+  ];
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
@@ -29,7 +36,7 @@ class Routes {
         });
 
     router.define(root.namedRoute, handler: _splashScreenRoute, transitionType: TransitionType.fadeIn);
-    router.define(home.namedRoute, handler: _homeScreenRoute, transitionType: TransitionType.fadeIn);
+    router.define(home.namedRoute, handler: _homeScreenRoute, transitionType: TransitionType.inFromRight);
     router.define(signIn.namedRoute, handler: _signInScreenRoute, transitionType: TransitionType.inFromRight);
     // TODO define more route handler
   }
