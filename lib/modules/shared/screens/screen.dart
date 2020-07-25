@@ -3,6 +3,7 @@ import 'package:async_loader/async_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/app/app-bar.dart';
 import 'package:flutter_basic_app/app/app-navigation-drawer.dart';
+import 'package:flutter_basic_app/modules/shared/screens/default-screens/error.dart';
 
 class Screen extends StatelessWidget {
   final GlobalKey<AsyncLoaderState> _asyncLoaderState = new GlobalKey<AsyncLoaderState>();
@@ -43,7 +44,7 @@ class Screen extends StatelessWidget {
       key: _asyncLoaderState,
       initState: () async => await initStateFunction(),
       renderLoad: () => new Center(child: new CircularProgressIndicator()),
-      renderError: ([error]) => new Text('Sorry, there was an error loading your joke'),
+      renderError: ([error]) => ErrorScreen(errorMessage: 'An error occured: ${error}',),
       renderSuccess: ({data}) => child
     );
 

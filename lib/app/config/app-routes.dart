@@ -3,7 +3,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/modules/home/screens/home.dart';
 import 'package:flutter_basic_app/modules/home/screens/splash.dart';
-import 'package:flutter_basic_app/modules/shared/screens/error.dart';
+import 'package:flutter_basic_app/modules/shared/screens/default-screens/error.dart';
 import 'package:flutter_basic_app/modules/user/screens/profile.dart';
 import 'package:flutter_basic_app/modules/user/screens/signin.dart';
 
