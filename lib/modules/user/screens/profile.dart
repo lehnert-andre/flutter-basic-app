@@ -21,6 +21,14 @@ class _UserProfileState extends State<UserProfileScreen> {
     return Screen(
       title: title,
       child: BodyText(title),
+      fetchData: getMessage,
     );
+  }
+
+
+  static const TIMEOUT = const Duration(seconds: 5);
+
+  getMessage() async {
+    return new Future.delayed(TIMEOUT, () => 'Welcome to your async screen');
   }
 }

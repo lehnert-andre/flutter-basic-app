@@ -27,4 +27,12 @@ class _HomeState extends State<HomeScreen> {
       child: BodyText(title),
     );
   }
+
+
+  static const TIMEOUT = const Duration(seconds: 5);
+
+  getMessage() async {
+    return new Future.delayed(TIMEOUT, () => 'Welcome to your async screen');
+  }
+
 }
