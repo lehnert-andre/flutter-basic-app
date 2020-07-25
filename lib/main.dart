@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/app/app.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(Main());
@@ -7,13 +9,6 @@ void main() {
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Text('Hallo'),
-    );
+    return App();
   }
 }
