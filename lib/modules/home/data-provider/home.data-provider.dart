@@ -2,6 +2,8 @@
 import 'package:flutter_basic_app/modules/shared/data-provider/data-provider-with-session.dart';
 import 'package:flutter_basic_app/modules/user/types/types.package.dart';
 
+import 'mapper/home.mapper.dart';
+
 class HomeDataProvider extends DataProviderWithSession {
 
   final String _userEndpoint = 'http://localhost:9000/v1/user';
@@ -12,7 +14,7 @@ class HomeDataProvider extends DataProviderWithSession {
     var response = await GET(url);
 
     if (response.isSuccessful) {
-      return UserDO.fromJson(response.json);
+      return toDO(UserTO.fromJson(response.json));
     } else {
       throw Exception(response.rawBody);
     }

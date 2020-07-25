@@ -16,11 +16,13 @@ dependencies:
   http_interceptor: ^0.3.2 # https://pub.dev/packages/http_interceptor
   fluro: ^1.6.3 # https://pub.dev/packages/fluro
   cupertino_icons: ^0.1.3
-  async_loader: ^0.1.2 # https://pub.dev/packages/async_loader
+  json_annotation: ^3.0.1 # runtime part of json_serializable # https://pub.dev/packages/json_annotation
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: ^3.3.0 # https://pub.dev/packages/json_serializable
+  build_runner: ^1.10.0 # dependency of json_serializable # https://pub.dev/packages/build_runner/install
 
 flutter:
   uses-material-design: true

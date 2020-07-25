@@ -91,10 +91,16 @@ class _SignInState extends State<SignInScreen> {
                 debugPrint('userName: $userName');
                 debugPrint('password: $password');
 
-                var userDO = await userDataProvider.sendSignInRequest(CredentialsTO(userName, password));
-                user.user = userDO;
+                try {
+                  var userDO = await userDataProvider.sendSignInRequest(
+                      CredentialsTO(userName, password));
+                  user.user = userDO;
 
-                Routes.navigateTo(context, Routes.HOME);
+                  Routes.navigateTo(context, Routes.HOME);
+
+                } catch(e) {
+                  print('Error: $e');
+                }
               },
             )
           ],

@@ -1,5 +1,6 @@
 
 import 'package:flutter_basic_app/modules/shared/data-provider/data-provider.package.dart';
+import 'package:flutter_basic_app/modules/user/data-provider/mapper/user.mapper.dart';
 import 'package:flutter_basic_app/modules/user/types/types.package.dart';
 
 class UserDataProvider extends DataProvider{
@@ -12,10 +13,9 @@ class UserDataProvider extends DataProvider{
     var response = await POST(url, credentialsDO);
 
     if (response.isSuccessful) {
-      return UserDO.fromJson(response.json);
+      return toDO(UserTO.fromJson(response.json));
     } else {
       throw Exception(response.rawBody);
     }
-
   }
 }

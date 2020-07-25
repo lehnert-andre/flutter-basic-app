@@ -1,5 +1,5 @@
-class TransferObject {
+abstract class TransferObject {
 
-  Map<String, dynamic> toJson() => {};
+  Map<String, dynamic> toJson();
   
 }
