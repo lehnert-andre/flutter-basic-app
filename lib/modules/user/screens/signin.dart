@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/app/app-bar.dart';
+import 'package:flutter_basic_app/app/config/app-routes.dart';
 import 'package:flutter_basic_app/modules/shared/screens/screen.dart';
-import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
+import 'package:flutter_basic_app/modules/user/data-provider/user.data-provider.dart';
+import 'package:flutter_basic_app/modules/user/provider/user.provider.dart';
+import 'package:flutter_basic_app/modules/user/types/types.package.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
 
@@ -15,23 +20,77 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInState extends State<SignInScreen> {
 
+  UserDataProvider get userDataProvider => GetIt.I<UserDataProvider>(); // get service instance from service locator
+
   final title = 'Sign In';
+
 
   @override
   Widget build(BuildContext context) {
     return Screen(
       title: title,
-      child: BodyText(title),
-      fetchData: getMessage,
+      child: buildContent(context),
       appBar: buildAppBar(context, title, showActions: false),
       showDrawer: false,
     );
   }
 
+  Widget buildContent(BuildContext context) {
+    var user = Provider.of<UserProvider>(context);
 
-  static const TIMEOUT = const Duration(seconds: 5);
+    TextEditingController userTextField = TextEditingController(text: 'ligadefault');
+    TextEditingController passwordTextField = TextEditingController(text: 'user');
 
-  getMessage() async {
-    return new Future.delayed(TIMEOUT, () => 'Welcome to your async screen');
+    return Center(
+      child: Container(
+        padding: EdgeInsets.all(80.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Login',
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            TextFormField(
+              controller: userTextField,
+              decoration: InputDecoration(
+                hintText: 'E-Mail',
+              ),
+              minLines: 1,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            TextFormField(
+              controller: passwordTextField,
+              decoration: InputDecoration(
+                hintText: 'Password',
+              ),
+              obscureText: true,
+              minLines: 1,
+              autofocus: false,
+              keyboardType: TextInputType.text,
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            RaisedButton(
+              color: Colors.cyan,
+              child: Text('LOGIN'),
+              onPressed: () async {
+                var userName = userTextField.text;
+                var password = passwordTextField.text;
+
+                debugPrint('userName: $userName');
+                debugPrint('password: $password');
+
+                var userDO = await userDataProvider.sendSignInRequest(CredentialsTO(userName, password));
+                user.user = userDO;
+
+                Routes.navigateTo(context, Routes.HOME);
+              },
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

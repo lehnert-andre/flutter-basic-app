@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter_basic_app/app/app-bar.dart';
-import 'package:flutter_basic_app/app/app-navigation-drawer.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/modules/shared/screens/screen.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
+import 'package:flutter_basic_app/modules/user/user.module.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -22,9 +22,12 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<UserProvider>(context);
+
     return Screen(
       title: title,
-      child: BodyText(title),
+      child: BodyText('Home with user name: ${user.email}'),
+      fetchData: getMessage,
     );
   }
 
