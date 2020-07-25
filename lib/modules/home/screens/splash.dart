@@ -17,7 +17,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashState extends State<SplashScreen> {
 
   void route() {
-    Routes.navigateAndResetHistoryTo(context, Routes.home);
+    Routes.navigateAndResetHistoryTo(context, Routes.HOME);
   }
 
   Future<Timer> startTime() async {

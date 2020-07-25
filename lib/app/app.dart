@@ -27,7 +27,7 @@ class _AppState extends State<App> {
     return MaterialApp(
       title: 'Basic App',
       theme: AppTheme.theme,
-      initialRoute: Routes.root.namedRoute,
+      initialRoute: Routes.ROOT.namedRoute,
       onGenerateRoute: Application.router.generator,
     );
   }

@@ -11,7 +11,7 @@ AppBar buildAppBar(BuildContext context,
     IconButton(
       icon: Icon(Icons.person),
       onPressed: () {
-        Routes.navigateTo(context, Routes.signIn);
+        Routes.navigateTo(context, Routes.SIGN_IN);
       },
     ),
   ];

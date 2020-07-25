@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/modules/shared/widgets/asset/asset.package.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 
 import 'config/app-routes.dart';
@@ -26,13 +27,13 @@ Drawer buildNavigationDrawer(BuildContext context,
                           child: new Align(
                             alignment: FractionalOffset.bottomLeft,
                             child: RaisedButton.icon(
-                                icon: Icon(Icons.person),
-                                label: BodyText('Sign In'),
-                                onPressed: () {
-                                  Routes.navigateTo(context, Routes.signIn);
-                                },
-                              ),
+                              icon: Icon(Routes.SIGN_IN.icon),
+                              label: BodyText(Routes.SIGN_IN.label),
+                              onPressed: () {
+                                Routes.navigateTo(context, Routes.SIGN_IN);
+                              },
                             ),
+                          ),
                         ),
                       ],
                     ),
@@ -42,14 +43,21 @@ Drawer buildNavigationDrawer(BuildContext context,
                   );
                 }
 
+                TextIcon leading;
+                if (routes[index - 1].icon != null) {
+                  leading = TextIcon(routes[index - 1].icon);
+                }
+
                 // index = 1 := fist route
                 return ListTile(
                   title: BodyText(routes[index - 1].label),
+                  leading: leading,
                   onTap: () {
                     Routes.navigateTo(context, routes[index - 1]);
                   },
                 );
               }
+
             );
           },
           itemCount: routes.length + 1, // workaround to add the header

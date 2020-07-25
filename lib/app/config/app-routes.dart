@@ -10,25 +10,28 @@ import 'package:flutter_basic_app/modules/user/screens/signin.dart';
 class Route {
   final String _namedRoute;
   final String _label;
+  final IconData _icon;
 
   Route(this._namedRoute, [
-    this._label = ''
+    this._label = '',
+    this._icon = Icons.help_outline
   ]);
 
   get namedRoute => _namedRoute;
   get label => _label;
+  get icon => _icon;
 }
 
 class Routes {
-  static final Route root = Route("/");
-  static final Route home = Route("/home", "Home");
-  static final Route profile = Route("/profile", "User Profile");
-  static final Route signIn = Route("/signIn", "Sign In");
-  static final Route errorNotFound = Route("/not-found");
+  static final Route ROOT = Route('/'); // ignore: non_constant_identifier_names
+  static final Route HOME = Route("/home", "Home", Icons.home); // ignore: non_constant_identifier_names
+  static final Route USER_PROFILE = Route("/profile", "User Profile", Icons.person); // ignore: non_constant_identifier_names
+  static final Route SIGN_IN = Route("/signIn", "Sign In", Icons.person); // ignore: non_constant_identifier_names
+  static final Route ERROR_NOT_FOUND = Route("/not-found"); // ignore: non_constant_identifier_names
 
   // Navigation Drawer routes with label
   static final visibleRoutes = <Route>[
-    home, profile
+    HOME, USER_PROFILE
   ];
 
   static void configureRoutes(Router router) {
@@ -38,10 +41,10 @@ class Routes {
           return ErrorScreen(errorMessage: 'Unknown route');
         });
 
-    router.define(root.namedRoute, handler: _splashScreenRoute, transitionType: TransitionType.fadeIn);
-    router.define(home.namedRoute, handler: _homeScreenRoute, transitionType: TransitionType.inFromRight);
-    router.define(profile.namedRoute, handler: _profileScreenRoute, transitionType: TransitionType.inFromRight);
-    router.define(signIn.namedRoute, handler: _signInScreenRoute, transitionType: TransitionType.inFromRight);
+    router.define(ROOT.namedRoute, handler: _splashScreenRoute, transitionType: TransitionType.fadeIn);
+    router.define(HOME.namedRoute, handler: _homeScreenRoute, transitionType: TransitionType.inFromRight);
+    router.define(USER_PROFILE.namedRoute, handler: _userProfileScreenRoute, transitionType: TransitionType.inFromRight);
+    router.define(SIGN_IN.namedRoute, handler: _signInScreenRoute, transitionType: TransitionType.inFromRight);
     // TODO define more route handler
   }
 
@@ -71,7 +74,7 @@ class Routes {
     return SignInScreen();
   });
 
-  static final _profileScreenRoute = Handler(handlerFunc: (_, __) {
+  static final _userProfileScreenRoute = Handler(handlerFunc: (_, __) {
     return UserProfileScreen();
   });
 }
