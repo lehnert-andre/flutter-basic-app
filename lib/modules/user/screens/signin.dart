@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/app/app-bar.dart';
 import 'package:flutter_basic_app/app/config/app-routes.dart';
 import 'package:flutter_basic_app/modules/shared/screens/screen.dart';
+import 'package:flutter_basic_app/modules/shared/widgets/layout/layout.package.dart';
 import 'package:flutter_basic_app/modules/user/data-provider/user.data-provider.dart';
 import 'package:flutter_basic_app/modules/user/provider/user.provider.dart';
 import 'package:flutter_basic_app/modules/user/types/types.package.dart';
@@ -23,13 +24,21 @@ class _SignInState extends State<SignInScreen> {
   UserDataProvider get userDataProvider => GetIt.I<UserDataProvider>(); // get service instance from service locator
 
   final title = 'Sign In';
+  bool _isLoading = false;
 
 
   @override
   Widget build(BuildContext context) {
     return Screen(
       title: title,
-      child: buildContent(context),
+      child: Builder(
+        builder: (_) {
+          if (_isLoading) {
+            return LoadingIndicator();
+          }
+          return buildContent(_);
+        },
+      ),
       appBar: buildAppBar(context, title, showActions: false),
       showDrawer: false,
     );

@@ -1,3 +1,5 @@
+import 'package:provider/single_child_widget.dart';
+
 abstract class Module {
 
   void importModule() {
@@ -8,4 +10,5 @@ abstract class Module {
   ///
   /// GetIt.I.registerLazySingleton(() => YourService());
   void registerServices();
+
 }

@@ -10,6 +10,7 @@ import 'json-response.dart';
 
 class DataProvider {
   Client _client;
+  Map<String, String> headers = {};
 
   DataProvider({ List<InterceptorContract> additionalInterceptors = const [] }) {
     _client = HttpClientWithInterceptor.build(interceptors: [
@@ -18,18 +19,47 @@ class DataProvider {
     ]);
   }
 
-  Future<JsonResponse> POST(String url, TransferObject dataObject) async {
-      var json = jsonEncode(dataObject);
+  Future<JsonResponse> GET(String url, { String jwt }) async {
+    _defineJWT(jwt);
 
-      var response = await _client.post(url, body: json);
+    var response = await _client.get(url, headers: getHeaders());
 
-      var statusCode = response.statusCode;
-      var body = response.body;
+    var statusCode = response.statusCode;
+    var body = response.body;
 
-      return JsonResponse(
-          statusCode,
-          jsonDecode(body) as Map<String, dynamic>,
-          rawBody: body
-      );
+    return JsonResponse(
+        statusCode,
+        jsonDecode(body) as Map<String, dynamic>,
+        rawBody: body
+    );
+  }
+
+  Future<JsonResponse> POST(String url, TransferObject dataObject,
+      { String jwt }) async {
+    _defineJWT(jwt);
+
+    var json = jsonEncode(dataObject);
+
+    var response = await _client.post(url, body: json, headers: headers);
+
+    var statusCode = response.statusCode;
+    var body = response.body;
+
+    return JsonResponse(
+        statusCode,
+        jsonDecode(body) as Map<String, dynamic>,
+        rawBody: body
+    );
+  }
+
+  void _defineJWT(String jwt) {
+    if (jwt != null) {
+      headers.putIfAbsent('Authorization', () => 'Bearer $jwt');
+    }
+  }
+
+  /// possible @override
+  getHeaders() {
+    return headers;
   }
 }
