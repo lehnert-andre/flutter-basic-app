@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/modules/home/screens/home.dart';
 import 'package:flutter_basic_app/modules/home/screens/splash.dart';
 import 'package:flutter_basic_app/modules/shared/screens/error.dart';
+import 'package:flutter_basic_app/modules/user/screens/profile.dart';
 import 'package:flutter_basic_app/modules/user/screens/signin.dart';
 
 class Route {
@@ -21,11 +22,13 @@ class Route {
 class Routes {
   static final Route root = Route("/");
   static final Route home = Route("/home", "Home");
+  static final Route profile = Route("/profile", "User Profile");
   static final Route signIn = Route("/signIn", "Sign In");
   static final Route errorNotFound = Route("/not-found");
 
+  // Navigation Drawer routes with label
   static final visibleRoutes = <Route>[
-    home, signIn
+    home, profile
   ];
 
   static void configureRoutes(Router router) {
@@ -37,6 +40,7 @@ class Routes {
 
     router.define(root.namedRoute, handler: _splashScreenRoute, transitionType: TransitionType.fadeIn);
     router.define(home.namedRoute, handler: _homeScreenRoute, transitionType: TransitionType.inFromRight);
+    router.define(profile.namedRoute, handler: _profileScreenRoute, transitionType: TransitionType.inFromRight);
     router.define(signIn.namedRoute, handler: _signInScreenRoute, transitionType: TransitionType.inFromRight);
     // TODO define more route handler
   }
@@ -65,5 +69,9 @@ class Routes {
 
   static final _signInScreenRoute = Handler(handlerFunc: (_, __) {
     return SignInScreen();
+  });
+
+  static final _profileScreenRoute = Handler(handlerFunc: (_, __) {
+    return UserProfileScreen();
   });
 }

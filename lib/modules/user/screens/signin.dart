@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
 import 'package:flutter_basic_app/app/app-bar.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 

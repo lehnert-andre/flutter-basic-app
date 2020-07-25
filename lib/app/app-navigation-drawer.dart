@@ -17,7 +17,25 @@ Drawer buildNavigationDrawer(BuildContext context,
               builder: (_) {
                 if (index == 0) { // workaround to add the header
                   return DrawerHeader(
-                    child: Headline('Basic App'),
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          child: Headline('Basic App'),
+                        ),
+                        Positioned(
+                          child: new Align(
+                            alignment: FractionalOffset.bottomLeft,
+                            child: RaisedButton.icon(
+                                icon: Icon(Icons.person),
+                                label: BodyText('Sign In'),
+                                onPressed: () {
+                                  Routes.navigateTo(context, Routes.signIn);
+                                },
+                              ),
+                            ),
+                        ),
+                      ],
+                    ),
                     decoration: BoxDecoration(
                       color: AppTheme.primaryColor,
                     ),

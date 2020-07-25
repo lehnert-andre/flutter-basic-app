@@ -5,19 +5,19 @@ import 'package:flutter_basic_app/app/app-bar.dart';
 import 'package:flutter_basic_app/app/app-navigation-drawer.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 
-class HomeScreen extends StatefulWidget {
+class UserProfileScreen extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _HomeState();
+    return _UserProfileState();
   }
 
 }
 
 
-class _HomeState extends State<HomeScreen> {
+class _UserProfileState extends State<UserProfileScreen> {
 
-  final title = 'Home';
+  final title = 'Profile';
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _HomeState extends State<HomeScreen> {
         drawer: buildNavigationDrawer(context),
         body: Container(
           padding: EdgeInsets.all(80.0),
-          child: BodyText('Home'),
+          child: BodyText('Profile'),
         ),
     );
   }
