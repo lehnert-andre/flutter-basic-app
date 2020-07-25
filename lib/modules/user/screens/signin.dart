@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_app/app/app-bar.dart';
+import 'package:flutter_basic_app/modules/shared/screens/screen.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -18,12 +18,9 @@ class _SignInState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: buildAppBar(context, title, showActions: false),
-        body: Container(
-          padding: EdgeInsets.all(80.0),
-          child: Headline('Sign In'),
-        ),
+    return Screen(
+      title: title,
+      child: BodyText(title),
     );
   }
 }
