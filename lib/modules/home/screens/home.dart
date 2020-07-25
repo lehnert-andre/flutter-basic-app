@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter_basic_app/app/app-bar.dart';
 import 'package:flutter_basic_app/app/app-navigation-drawer.dart';
+import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -25,7 +26,7 @@ class _HomeState extends State<HomeScreen> {
         drawer: buildNavigationDrawer(context),
         body: Container(
           padding: EdgeInsets.all(80.0),
-          child: Text('Home', style: Theme.of(context).textTheme.headline1),
+          child: Headline('Home'),
         ),
     );
   }

@@ -3,6 +3,8 @@ import 'dart:async';
 
 import 'package:flutter_basic_app/app/config/app-routes.dart';
 import 'package:flutter_basic_app/app/config/app-theme.dart';
+import 'package:flutter_basic_app/modules/shared/widgets/layout/layout.package.dart';
+import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -45,7 +47,8 @@ class _SplashState extends State<SplashScreen> {
         Container(
           decoration: BoxDecoration(
               color: AppTheme.textColor,
-              gradient: LinearGradient(colors: [ AppTheme.primaryColor, AppTheme.backgroundColor ],
+              gradient: LinearGradient(
+                  colors: [ AppTheme.primaryColor, AppTheme.backgroundColor ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter
               )
@@ -58,11 +61,8 @@ class _SplashState extends State<SplashScreen> {
 //              child: image,
 //            ),
 //            Padding(padding: EdgeInsets.only(top: 20.0)),
-            Text(
-              'Hello!',
-              style: Theme.of(context).textTheme.headline1,
-            ),
-            Padding(padding: EdgeInsets.only(top: 20.0)),   // padding top for button
+            Headline('Hello!'),
+            PaddingTop(20.0),   // padding top for button
           ],
         )
       ],

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 
 class ErrorScreen extends StatelessWidget {
 
@@ -13,11 +14,7 @@ class ErrorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body:
-              Text(
-                errorMessage,
-                style: Theme.of(context).textTheme.headline1,
-              ),
+      body: Headline(errorMessage),
     );
   }
 }
