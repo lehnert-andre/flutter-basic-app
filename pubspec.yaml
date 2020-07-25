@@ -20,10 +20,12 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
+# Install dependencies from https://pub.dev/
 dependencies:
   flutter:
     sdk: flutter
-
+  get_it: ^4.0.4 # Service Locator Library
+  http: ^0.12.2 # HTTP client
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
