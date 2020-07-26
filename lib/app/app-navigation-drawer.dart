@@ -27,10 +27,10 @@ Drawer buildNavigationDrawer(BuildContext context,
                           child: new Align(
                             alignment: FractionalOffset.bottomLeft,
                             child: RaisedButton.icon(
-                              icon: Icon(Routes.SIGN_IN.icon),
-                              label: BodyText(Routes.SIGN_IN.label),
+                              icon: Icon(Routes.LOG_IN.icon),
+                              label: BodyText(Routes.LOG_IN.label),
                               onPressed: () {
-                                Routes.navigateTo(context, Routes.SIGN_IN);
+                                Routes.navigateTo(context, Routes.LOG_IN);
                               },
                             ),
                           ),

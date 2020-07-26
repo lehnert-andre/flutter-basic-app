@@ -9,9 +9,9 @@ AppBar buildAppBar(BuildContext context,
 
   var actions = <Widget>[
     IconButton(
-      icon: Icon(Icons.person),
+      icon: Icon(Routes.LOG_IN.icon),
       onPressed: () {
-        Routes.navigateTo(context, Routes.SIGN_IN);
+        Routes.navigateTo(context, Routes.LOG_IN);
       },
     ),
   ];

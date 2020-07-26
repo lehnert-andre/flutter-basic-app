@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/modules/home/data-provider/home.data-provider.dart';
-import 'package:flutter_basic_app/modules/shared/screens/screen.dart';
-import 'package:flutter_basic_app/modules/shared/utils/utils.package.dart';
-import 'package:flutter_basic_app/modules/shared/widgets/layout/layout.package.dart';
-import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
+import 'package:flutter_basic_app/modules/shared/shared.module.dart';
 import 'package:flutter_basic_app/modules/user/types/types.package.dart';
 import 'package:get_it/get_it.dart';
 
@@ -38,13 +35,13 @@ class _HomeState extends State<HomeScreen> {
 
     try {
       homeDataProvider.useSessionOf(context);
-      var userDO = await homeDataProvider.sendWhoAmIRequest();
+//      var userDO = await homeDataProvider.sendWhoAmIRequest(); TODO
 
-      await sleep(seconds: 1); // TODO remove
-
-      setState(() {
-        user = userDO;
-      });
+//      await sleep(seconds: 1); // TODO remove
+//
+//      setState(() {
+//        user = userDO;
+//      });
 
     } catch(e) {
       print('Error: $e');

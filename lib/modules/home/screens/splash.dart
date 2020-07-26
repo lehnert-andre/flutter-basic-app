@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter_basic_app/app/config/app-routes.dart';
-import 'package:flutter_basic_app/app/config/app-theme.dart';
-import 'package:flutter_basic_app/modules/shared/widgets/layout/layout.package.dart';
-import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
+import 'package:flutter_basic_app/app/application.module.dart';
+import 'package:flutter_basic_app/modules/shared/shared.module.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
