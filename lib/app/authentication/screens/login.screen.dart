@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/app/config/app-routes.dart';
 import 'package:flutter_basic_app/modules/shared/shared.module.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
 
 import '../bloc/authentication.bloc.dart';
 
@@ -12,19 +12,16 @@ class LogInScreen extends StatelessWidget {
     return Screen(
       title: Routes.LOG_IN.label,
       showDrawer: false,
-      buildContent: buildContent,
+      buildContent: _buildContent,
     );
   }
 
-  Widget buildContent(context, state) {
+  Widget _buildContent(context, state) {
+
     TextEditingController userTextField = TextEditingController(text: 'ligadefault');
     TextEditingController passwordTextField = TextEditingController(text: 'user');
 
-    return Center(
-        child: Container(
-          padding: EdgeInsets.all(80.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return FormCard(
             children: [
               Headline(Routes.LOG_IN.label),
               TextFormField(
@@ -67,8 +64,6 @@ class LogInScreen extends StatelessWidget {
                 },
               )
             ],
-          ),
-        ),
-      );
+        );
   }
 }

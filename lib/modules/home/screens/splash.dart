@@ -60,7 +60,7 @@ class _SplashState extends State<SplashScreen> {
 //            ),
 //            Padding(padding: EdgeInsets.only(top: 20.0)),
             Headline('Hello!'),
-            PaddingTop(20.0),   // padding top for button
+            PaddingTop(padding: 20.0),   // padding top for button
           ],
         )
       ],

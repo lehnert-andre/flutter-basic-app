@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
 import 'package:flutter_basic_app/app/layout/app-bar.dart';
 import 'package:flutter_basic_app/app/layout/app-navigation-drawer.dart';
+import 'package:flutter_basic_app/modules/shared/shared.module.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 typedef BuildContent = Widget Function(BuildContext, AuthenticationState);
@@ -42,8 +43,8 @@ class Screen extends StatelessWidget {
         return Scaffold(
           appBar: defaultAppBar,
           drawer: defaultDrawer,
-          body: Container(
-            padding: EdgeInsets.all(10.0),
+          body: PaddingAll(
+            padding: 20,
             child: buildContent(context, state)
           ),
         );
