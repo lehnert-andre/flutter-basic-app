@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
 import 'package:flutter_basic_app/modules/home/data-provider/home.data-provider.dart';
 import 'package:flutter_basic_app/modules/shared/shared.module.dart';
 import 'package:flutter_basic_app/modules/user/types/types.package.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -57,18 +59,22 @@ class _HomeState extends State<HomeScreen> {
 
     return Screen(
       title: title,
-      child: Builder(
-        builder: (_) {
-          if (_isLoading) {
-            return LoadingIndicator();
-          }
-          return buildContent(_);
-        },
-      ),
+      buildContent: buildContent,
     );
   }
 
-  Widget buildContent(_) {
-    return BodyText('Home with user name: ${user != null ? user.email : 'Unknown'}');
+  Widget buildContent(BuildContext context, AuthenticationState state) {
+    return Builder(
+      builder: (_) {
+        if (_isLoading) {
+          return LoadingIndicator();
+        }
+        return buildText(_, state);
+      },
+    );
+  }
+
+  Widget buildText(_, AuthenticationState state) {
+    return BodyText('Home with user name: ${state?.session?.username ?? 'Unknown'}');
   }
 }

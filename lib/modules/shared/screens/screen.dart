@@ -1,7 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
 import 'package:flutter_basic_app/app/layout/app-bar.dart';
 import 'package:flutter_basic_app/app/layout/app-navigation-drawer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+typedef BuildContent = Widget Function(BuildContext, AuthenticationState);
 
 class Screen extends StatelessWidget {
 
@@ -9,9 +13,11 @@ class Screen extends StatelessWidget {
   final String title;
   final AppBar appBar;
   final bool showDrawer;
+  final BuildContent buildContent;
 
   Screen({
     this.child, // screen content
+    @required this.buildContent, // dynamic function with access to the authentication state
     this.title = '', // AppBar title
     this.appBar, // custom app bar
     this.showDrawer = true, // show navigation drawer
@@ -30,13 +36,18 @@ class Screen extends StatelessWidget {
       defaultDrawer = buildNavigationDrawer(context);
     }
 
-    return Scaffold(
-      appBar: defaultAppBar,
-      drawer: defaultDrawer,
-      body: Container(
-        padding: EdgeInsets.all(10.0),
-        child: child
-      ),
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (BuildContext context, state) {
+        return Scaffold(
+          appBar: defaultAppBar,
+          drawer: defaultDrawer,
+          body: Container(
+            padding: EdgeInsets.all(10.0),
+            child: buildContent(context, state)
+          ),
+        );
+      }
     );
   }
 }
