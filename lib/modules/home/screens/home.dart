@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
+import 'package:flutter_basic_app/modules/home/bloc/home.bloc.dart';
 import 'package:flutter_basic_app/modules/home/data-provider/home.data-provider.dart';
 import 'package:flutter_basic_app/modules/shared/shared.module.dart';
+import 'package:flutter_basic_app/modules/user/data-provider/user.data-provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,21 +15,48 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(_) {
 
-    return Screen(
-      title: title,
-      buildContent: buildContent,
+    return BlocProvider(
+        create: (context) {
+          return HomeBloc(
+            homeDataProvider: RepositoryProvider.of<
+                HomeDataProvider>(context),
+          );
+        },
+        child: Screen(
+          title: title,
+          buildContent: buildContent,
+        ),
     );
   }
 
-  Widget buildContent(BuildContext context, AuthenticationState state) {
-    return Builder(
-      builder: (_) {
-        return buildText(_, state);
+  Widget buildContent(context, session) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (_, homeState) {
+        return Builder(
+          builder: (_) {
+            return buildText(_, session, homeState);
+          },
+        );
       },
     );
   }
 
-  Widget buildText(_, AuthenticationState state) {
-    return BodyText('Home with session user: ${AuthenticationSelector.username(state) ?? 'Unknown'}');
+  Widget buildText(_, session, homeState) {
+    return Column(
+      children: <Widget>[
+        BodyText('Home with session user: ${AuthenticationSelector.username(session) ?? 'Unknown'}'),
+        SizedBox( height: 40 ),
+        BodyText('Perform request with active session token to test the authentication:'),
+        PrimaryButton(
+          child: BodyText('Call /user/me'),
+          onPressed: () async {
+            HomeBloc.of(_).add(RequestWhoAmI(session: session));
+
+          },
+        ),
+        BodyText('WhoAmI: ${HomeSelector.emailWithDefault(homeState, 'Unknown')}'),
+      ],
+    );
   }
 }

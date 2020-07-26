@@ -8,7 +8,13 @@ class DataProviderWithSession extends DataProvider {
   Session _session;
 
   void useSessionOf(BuildContext context) {
-    _session = AuthenticationBloc.of(context)?.state?.session;
+    _session = AuthenticationBloc.of(context).select(AuthenticationSelector.session);
+
+    print('Use session: $_session');
+  }
+
+  void useSession(Session session) {
+    _session = session;
 
     print('Use session: $_session');
   }

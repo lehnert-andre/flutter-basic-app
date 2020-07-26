@@ -9,4 +9,8 @@ class HomeSelector {
   static String email(HomeState state) {
     return user(state)?.email;
   }
+
+  static String emailWithDefault(HomeState state, String defaultValue) {
+    return user(state)?.email ?? defaultValue;
+  }
 }

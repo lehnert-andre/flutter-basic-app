@@ -8,7 +8,9 @@ abstract class HomeEvent extends Equatable {
 }
 
 class RequestWhoAmI extends HomeEvent {
-  const RequestWhoAmI();
+  final AuthenticationState session;
+
+  const RequestWhoAmI({ this.session });
 
   @override
   List<Object> get props => [];

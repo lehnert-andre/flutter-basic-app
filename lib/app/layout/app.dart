@@ -27,8 +27,7 @@ class App extends StatelessWidget {
               child: BlocProvider(
                 create: (context) {
                   return AuthenticationBloc(
-                    authenticationRepository: RepositoryProvider.of<
-                        AuthenticationDataProvider>(context),
+                    authenticationDataProvider: RepositoryProvider.of<AuthenticationDataProvider>(context),
                   );
                 },
                 child: MaterialApp(

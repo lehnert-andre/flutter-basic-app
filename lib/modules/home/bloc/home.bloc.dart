@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
 import 'package:flutter_basic_app/modules/home/data-provider/home.data-provider.dart';
 import 'package:flutter_basic_app/modules/shared/types/types.package.dart';
 import 'package:flutter_basic_app/modules/user/types/types.package.dart';
@@ -33,15 +34,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is RequestWhoAmI) {
-      yield* _requestWhoAmI();
+      yield* _requestWhoAmI(event);
     }
   }
 
   /// reducer functions
 
-  Stream<HomeState> _requestWhoAmI() async* {
+  Stream<HomeState> _requestWhoAmI(RequestWhoAmI event) async* {
     try {
         yield HomeStateChanged(isUserLoading: true);
+        var session = AuthenticationSelector.session(event.session);
+        homeDataProvider.useSession(session);
+
         var user = await homeDataProvider.sendWhoAmIRequest();
         yield HomeStateChanged(isUserLoading: false, user: user);
     } catch (e) {

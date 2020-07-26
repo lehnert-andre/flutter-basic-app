@@ -17,9 +17,9 @@ typedef AuthenticationStateSelector = dynamic Function(AuthenticationState);
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
 
-  AuthenticationBloc({@required this.authenticationRepository}) : super(Unauthenticated());
+  AuthenticationBloc({@required this.authenticationDataProvider}) : super(Unauthenticated());
 
-  final AuthenticationDataProvider authenticationRepository;
+  final AuthenticationDataProvider authenticationDataProvider;
 
   static AuthenticationBloc of(BuildContext context) {
     return BlocProvider.of<AuthenticationBloc>(context);
@@ -46,7 +46,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> _login(Login event) async* {
     try {
         print('Authenticating ...');
-        var session = await authenticationRepository.logIn(
+        var session = await authenticationDataProvider.logIn(
             authenticationRequest: AuthenticationRequest(event.username, event.password)
         );
         yield Authenticated(session: session);
