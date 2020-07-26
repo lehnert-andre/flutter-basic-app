@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_app/app/app-bar.dart';
-import 'package:flutter_basic_app/app/app-navigation-drawer.dart';
+import 'package:flutter_basic_app/app/layout/app-bar.dart';
+import 'package:flutter_basic_app/app/layout/app-navigation-drawer.dart';
 
 class Screen extends StatelessWidget {
 

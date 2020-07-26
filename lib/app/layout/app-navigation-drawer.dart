@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/asset/asset.package.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 
-import 'config/app-routes.dart';
-import 'config/app-theme.dart';
+import '../config/app-routes.dart';
+import '../config/app-theme.dart';
 
 Drawer buildNavigationDrawer(BuildContext context,
     ) {

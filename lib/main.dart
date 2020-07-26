@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_app/app/app.dart';
+import 'package:flutter_basic_app/app/layout/app.dart';
 import 'package:flutter_basic_app/app/application.module.dart';
 import 'package:flutter_basic_app/modules/home/home.module.dart';
 import 'package:flutter_basic_app/modules/shared/shared.module.dart';

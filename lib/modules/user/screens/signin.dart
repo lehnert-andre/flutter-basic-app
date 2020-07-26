@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_app/app/app-bar.dart';
+import 'package:flutter_basic_app/app/application.module.dart';
 import 'package:flutter_basic_app/app/config/app-routes.dart';
 import 'package:flutter_basic_app/modules/shared/screens/screen.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/layout/layout.package.dart';

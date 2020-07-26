@@ -3,9 +3,9 @@ import 'package:flutter_basic_app/app/authentication/authentication.package.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import 'config/app-globals.dart';
-import 'config/app-routes.dart';
-import 'config/app-theme.dart';
+import '../config/app-globals.dart';
+import '../config/app-routes.dart';
+import '../config/app-theme.dart';
 
 
 class App extends StatelessWidget {
