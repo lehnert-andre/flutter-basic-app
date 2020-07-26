@@ -19,6 +19,12 @@ class DataProviderWithSession extends DataProvider {
     print('Use session: $_session');
   }
 
+  void clearSession() {
+    _session = null;
+
+    print('Clear session');
+  }
+
   String get token {
     return _session.token;
   }
@@ -27,7 +33,11 @@ class DataProviderWithSession extends DataProvider {
   getHeaders() {
     if (token != null) {
       headers.putIfAbsent('Authorization', () => 'Bearer $token');
+    } else {
+      headers.remove('Authorization');
     }
+
+    print('User header: $headers');
 
     return headers;
   }

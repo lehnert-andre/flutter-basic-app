@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/app/application.module.dart';
 import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
 import 'package:flutter_basic_app/app/layout/app-bar.dart';
 import 'package:flutter_basic_app/app/layout/app-navigation-drawer.dart';
@@ -28,7 +29,6 @@ class Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var defaultAppBar = buildAppBar(context, title, showActions: showActions);
     if (appBar != null) {
       defaultAppBar = appBar;

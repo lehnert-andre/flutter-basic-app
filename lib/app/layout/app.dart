@@ -30,13 +30,17 @@ class App extends StatelessWidget {
                     authenticationDataProvider: RepositoryProvider.of<AuthenticationDataProvider>(context),
                   );
                 },
-                child: MaterialApp(
-                  title: 'Basic App',
-                  theme: AppTheme.theme,
-                  initialRoute: Routes.ROOT.namedRoute,
-                  onGenerateRoute: Application.router.generator,
-                ),
-              ),
+                  child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                    builder: (context, authState) {
+                      return MaterialApp(
+                          title: 'Basic App',
+                          theme: AppTheme.theme,
+                          initialRoute: Routes.ROOT.namedRoute,
+                          onGenerateRoute: Application.router.generator,
+                      );
+                    }
+                    ),
+                  ),
             );
           } else {
             return Center(child: CircularProgressIndicator());

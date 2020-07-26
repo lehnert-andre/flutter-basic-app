@@ -15,3 +15,10 @@ class RequestWhoAmI extends HomeEvent {
   @override
   List<Object> get props => [];
 }
+
+class InvalidateSession extends HomeEvent {
+  const InvalidateSession();
+
+  @override
+  List<Object> get props => [];
+}

@@ -35,6 +35,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is RequestWhoAmI) {
       yield* _requestWhoAmI(event);
+    } else if (event is InvalidateSession) {
+      yield* _resetState();
     }
   }
 
@@ -57,5 +59,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield HomeStateChanged(userError: ErrorDO(errorMessage: '$e'));
       }
     }
+  }
+
+  Stream<HomeState> _resetState() async* {
+    homeDataProvider.clearSession();
+    yield HomeStateChanged();
   }
 }

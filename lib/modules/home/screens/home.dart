@@ -3,7 +3,6 @@ import 'package:flutter_basic_app/app/authentication/authentication.package.dart
 import 'package:flutter_basic_app/modules/home/bloc/home.bloc.dart';
 import 'package:flutter_basic_app/modules/home/data-provider/home.data-provider.dart';
 import 'package:flutter_basic_app/modules/shared/shared.module.dart';
-import 'package:flutter_basic_app/modules/user/data-provider/user.data-provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -14,7 +13,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(_) {
-
     return BlocProvider(
         create: (context) {
           return HomeBloc(
@@ -30,15 +28,22 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget buildContent(context, session) {
-    return BlocBuilder<HomeBloc, HomeState>(
-      buildWhen: (previous, current) => previous != current,
-      builder: (_, homeState) {
-        return Builder(
-          builder: (_) {
-            return buildText(_, session, homeState);
-          },
-        );
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (context, state) {
+        if (!AuthenticationSelector.isAuthenticated(state)) {
+          HomeBloc.of(context).add(InvalidateSession());
+        }
       },
+      child: BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) => previous != current,
+        builder: (_, homeState) {
+          return Builder(
+            builder: (_) {
+              return buildText(_, session, homeState);
+            },
+          );
+        },
+      ),
     );
   }
 
