@@ -28,28 +28,36 @@ class DataProvider {
     var body = response.body;
 
     return JsonResponse(
-        statusCode,
-        jsonDecode(body) as Map<String, dynamic>,
+        statusCode: statusCode,
+        json: jsonDecode(body) as Map<String, dynamic>,
         rawBody: body
     );
   }
 
   Future<JsonResponse> POST(String url, TransferObject dataObject,
       { String jwt }) async {
-    _defineJWT(jwt);
+    try {
+      _defineJWT(jwt);
 
-    var json = jsonEncode(dataObject);
+      var json = jsonEncode(dataObject);
 
-    var response = await _client.post(url, body: json, headers: headers);
+      var response = await _client.post(url, body: json, headers: headers);
 
-    var statusCode = response.statusCode;
-    var body = response.body;
+      var statusCode = response.statusCode;
+      var body = response.body;
 
-    return JsonResponse(
-        statusCode,
-        jsonDecode(body) as Map<String, dynamic>,
-        rawBody: body
-    );
+      return JsonResponse(
+          statusCode: statusCode,
+          json: jsonDecode(body) as Map<String, dynamic>,
+          rawBody: body
+      );
+
+    } catch(e) {
+      return JsonResponse(
+          statusCode: 500,
+          rawBody: '$e',
+      );
+    }
   }
 
   void _defineJWT(String jwt) {
@@ -61,5 +69,13 @@ class DataProvider {
   /// possible @override
   getHeaders() {
     return headers;
+  }
+
+  void handleError(JsonResponse response) {
+    if (response.statusCode >= 400 && response.statusCode < 500) {
+      throw BusinessException(statusCode: response.statusCode, errorMessage: response.rawBody);
+    }
+
+    throw TechnicalException(statusCode: response.statusCode, errorMessage: response.rawBody);
   }
 }

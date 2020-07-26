@@ -6,6 +6,7 @@ import 'package:flutter_basic_app/app/application.module.dart';
 import 'package:flutter_basic_app/modules/home/home.module.dart';
 import 'package:flutter_basic_app/modules/shared/shared.module.dart';
 import 'package:flutter_basic_app/modules/user/user.module.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import 'app/config/app-globals.dart';
@@ -48,7 +49,24 @@ class Main extends StatelessWidget {
         ...SharedModule.providers
         // TODO register further providers to handle the state management
       ],
-      child: App(),
+      child: FutureBuilder(
+        future: GetIt.I.allReady(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+
+        return App(
+          dataProviders: [
+            ...ApplicationModule().instantiateServices(),
+            ...HomeModule().instantiateServices(),
+            ...UserModule().instantiateServices(),
+            ...SharedModule().instantiateServices(),
+            // TODO instantiate further service
+          ]);
+        } else {
+          return Center(child: LoadingIndicator(),);
+        }
+        }
+      ),
     );
   }
 }

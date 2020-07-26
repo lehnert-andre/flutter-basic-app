@@ -19,9 +19,10 @@ class Authenticated extends AuthenticationState {
 }
 
 class Unauthenticated extends AuthenticationState {
-  const Unauthenticated({this.session = const Session()});
+  const Unauthenticated({this.session = const Session(), this.error });
 
   final Session session;
+  final ErrorDO error;
 
   @override
   List<Object> get props => [];

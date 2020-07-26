@@ -1,5 +1,7 @@
 
 import 'package:flutter_basic_app/modules/shared/data-provider/data-provider-with-session.dart';
+import 'package:flutter_basic_app/modules/shared/data-provider/json-response.dart';
+import 'package:flutter_basic_app/modules/shared/shared.module.dart';
 import 'package:flutter_basic_app/modules/user/types/types.package.dart';
 
 import 'mapper/home.mapper.dart';
@@ -16,7 +18,7 @@ class HomeDataProvider extends DataProviderWithSession {
     if (response.isSuccessful) {
       return toDO(UserTO.fromJson(response.json));
     } else {
-      throw Exception(response.rawBody);
+      handleError(response);
     }
 
   }

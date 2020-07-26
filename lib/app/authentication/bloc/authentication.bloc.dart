@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/modules/shared/shared.module.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data-provider/authentication.data-provider.dart';
@@ -10,6 +11,9 @@ import '../types/types.package.dart';
 
 part 'authentication.event.dart';
 part 'authentication.state.dart';
+part 'authentication.selector.dart';
+
+typedef AuthenticationStateSelector = dynamic Function(AuthenticationState);
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
 
@@ -19,6 +23,10 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
   static AuthenticationBloc of(BuildContext context) {
     return BlocProvider.of<AuthenticationBloc>(context);
+  }
+
+  dynamic select(AuthenticationStateSelector selector) {
+    return selector(state);
   }
 
 
@@ -43,8 +51,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         );
         yield Authenticated(session: session);
         print('Authenticated !!!');
-    } catch (_) {
-      yield Unauthenticated();
+    } catch (e) {
+      print('Error: $e');
+
+      if (e is AppException) {
+        yield Unauthenticated(error: e.error);
+      } else {
+        yield Unauthenticated(error: ErrorDO(errorMessage: '$e'));
+      }
     }
   }
 

@@ -23,7 +23,7 @@ class AuthenticationDataProvider extends DataProvider {
     if (response.isSuccessful) {
       return toSession(AuthenticationResponse.fromJson(response.json));
     } else {
-      return null;
+      handleError(response);
     }
   }
 }

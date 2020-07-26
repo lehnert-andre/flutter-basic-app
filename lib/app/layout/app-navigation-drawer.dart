@@ -62,7 +62,8 @@ Drawer buildNavigationDrawer(BuildContext context,
 
 _loginButton(BuildContext context) {
   var authBloc = AuthenticationBloc.of(context);
-  var isAuthenticated = authBloc?.state?.session?.isAuthenticated;
+
+  var isAuthenticated = authBloc.select(AuthenticationSelector.isAuthenticated);
 
   if (isAuthenticated) {
     return RaisedButton.icon(

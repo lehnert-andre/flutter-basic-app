@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
 import 'package:flutter_basic_app/modules/home/data-provider/home.data-provider.dart';
 import 'package:flutter_basic_app/modules/shared/shared.module.dart';
-import 'package:flutter_basic_app/modules/shared/utils/sleep.dart';
-import 'package:flutter_basic_app/modules/user/types/types.package.dart';
 import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,6 +27,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget buildText(_, AuthenticationState state) {
-    return BodyText('Home with session user: ${state?.session?.username ?? 'Unknown'}');
+    return BodyText('Home with session user: ${AuthenticationSelector.username(state) ?? 'Unknown'}');
   }
 }

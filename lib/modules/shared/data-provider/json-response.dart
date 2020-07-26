@@ -3,7 +3,9 @@ class JsonResponse {
   final Map<String, dynamic> json;
   final String rawBody;
 
-  JsonResponse(this.statusCode, this.json, {
+  JsonResponse({
+    this.statusCode,
+    this.json,
     this.rawBody
   });
 
