@@ -12,6 +12,7 @@ class LogInScreen extends StatelessWidget {
     return Screen(
       title: Routes.LOG_IN.label,
       showDrawer: false,
+      showActions: false,
       buildContent: _buildContent,
     );
   }
@@ -69,7 +70,7 @@ class LogInScreen extends StatelessWidget {
 
         try {
           AuthenticationBloc.of(context).add(Login(userName, password));
-          Routes.navigateBack(context);
+          Routes.navigateTo(context, Routes.HOME);
         } catch (e) {
           print('Error: $e');
         }

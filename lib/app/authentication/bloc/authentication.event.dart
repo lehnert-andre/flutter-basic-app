@@ -8,20 +8,6 @@ abstract class AuthenticationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class Authenticated extends AuthenticationEvent {
-  const Authenticated(this.session);
-
-  final Session session;
-
-  @override
-  List<Object> get props => [session];
-
-  @override
-  String toString() {
-    return 'Authenticated{session: $session}';
-  }
-}
-
 class Login extends AuthenticationEvent {
   const Login(this.username, this.password);
 

@@ -14,6 +14,7 @@ class Screen extends StatelessWidget {
   final String title;
   final AppBar appBar;
   final bool showDrawer;
+  final bool showActions;
   final BuildContent buildContent;
 
   Screen({
@@ -22,12 +23,13 @@ class Screen extends StatelessWidget {
     this.title = '', // AppBar title
     this.appBar, // custom app bar
     this.showDrawer = true, // show navigation drawer
+    this.showActions = true, // show action icons
   });
 
   @override
   Widget build(BuildContext context) {
 
-    var defaultAppBar = buildAppBar(context, title);
+    var defaultAppBar = buildAppBar(context, title, showActions: showActions);
     if (appBar != null) {
       defaultAppBar = appBar;
     }

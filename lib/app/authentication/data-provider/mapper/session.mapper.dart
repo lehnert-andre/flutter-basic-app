@@ -3,9 +3,9 @@ import '../../types/types.package.dart';
 
 Session toSession(AuthenticationResponse to) {
   return Session(
-    to.email,
-    to.jwt,
-    _toPermissions(to.permissions)
+    username: to.email,
+    token: to.jwt,
+    permissions: _toPermissions(to.permissions)
   );
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/asset/asset.package.dart';
 import 'package:flutter_basic_app/modules/shared/widgets/typography/typography.package.dart';
 
@@ -26,13 +27,7 @@ Drawer buildNavigationDrawer(BuildContext context,
                         Positioned(
                           child: new Align(
                             alignment: FractionalOffset.bottomLeft,
-                            child: RaisedButton.icon(
-                              icon: Icon(Routes.LOG_IN.icon),
-                              label: BodyText(Routes.LOG_IN.label),
-                              onPressed: () {
-                                Routes.navigateTo(context, Routes.LOG_IN);
-                              },
-                            ),
+                            child: _loginButton(_)
                           ),
                         ),
                       ],
@@ -64,3 +59,28 @@ Drawer buildNavigationDrawer(BuildContext context,
         ),
   );
 }
+
+_loginButton(BuildContext context) {
+  var authBloc = AuthenticationBloc.of(context);
+  var isAuthenticated = authBloc?.state?.session?.isAuthenticated;
+
+  if (isAuthenticated) {
+    return RaisedButton.icon(
+      icon: Icon(Icons.clear),
+      label: BodyText('Logout'),
+      onPressed: () {
+        authBloc.add(Logout());
+        Routes.navigateBack(context);
+      },
+    );
+  } else {
+    return RaisedButton.icon(
+      icon: Icon(Routes.LOG_IN.icon),
+      label: BodyText(Routes.LOG_IN.label),
+      onPressed: () {
+        Routes.navigateTo(context, Routes.LOG_IN);
+      },
+    );
+  }
+}
+

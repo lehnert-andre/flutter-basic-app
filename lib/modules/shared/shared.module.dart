@@ -7,6 +7,7 @@ export 'widgets/asset/asset.package.dart';
 export 'widgets/layout/layout.package.dart';
 export 'widgets/typography/typography.package.dart';
 export 'widgets/buttons/buttons.package.dart';
+export 'utils/utils.package.dart';
 
 class SharedModule extends Module {
 

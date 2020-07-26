@@ -13,7 +13,7 @@ part 'authentication.state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
 
-  AuthenticationBloc({@required this.authenticationRepository}) : super(AuthenticationState());
+  AuthenticationBloc({@required this.authenticationRepository}) : super(Unauthenticated());
 
   final AuthenticationDataProvider authenticationRepository;
 
@@ -28,8 +28,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> mapEventToState(AuthenticationEvent event) async* {
     if (event is Login) {
       yield* _login(event);
-    } else if (event is Authenticated) {
-      yield* _authenticated(event);
     } else if (event is Logout) {
       yield* _logout();
     }
@@ -43,24 +41,16 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         var session = await authenticationRepository.logIn(
             authenticationRequest: AuthenticationRequest(event.username, event.password)
         );
-        yield AuthenticationState(session: session);
+        yield Authenticated(session: session);
         print('Authenticated !!!');
     } catch (_) {
-      yield AuthenticationState();
-    }
-  }
-
-  Stream<AuthenticationState> _authenticated(Authenticated event) async* {
-    try {
-      final session = event.session;
-      yield AuthenticationState(session: session);
-    } catch (_) {
-      yield AuthenticationState();
+      yield Unauthenticated();
     }
   }
 
   Stream<AuthenticationState> _logout() async* {
-    yield AuthenticationState();
+    print('Logout');
+    yield Unauthenticated();
   }
 
 }

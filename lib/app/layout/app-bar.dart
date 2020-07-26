@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_app/app/authentication/authentication.package.dart';
 import 'package:flutter_basic_app/app/config/app-routes.dart';
 
 AppBar buildAppBar(BuildContext context,
@@ -8,12 +9,7 @@ AppBar buildAppBar(BuildContext context,
     }) {
 
   var actions = <Widget>[
-    IconButton(
-      icon: Icon(Routes.LOG_IN.icon),
-      onPressed: () {
-        Routes.navigateTo(context, Routes.LOG_IN);
-      },
-    ),
+
   ];
 
   if (!showActions) { // hide actions
