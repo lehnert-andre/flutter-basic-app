@@ -22,18 +22,22 @@ class _UserProfileState extends State<UserProfileScreen> {
   Widget build(BuildContext context) {
     return Screen(
       title: title,
-      child: Builder(
-        builder: (_) {
-          if (_isLoading) {
-            return LoadingIndicator();
-          }
-          return buildContent(_);
-        },
-      ),
+      buildContent: buildContent,
     );
   }
 
-  Widget buildContent(_) {
+  Widget buildContent(_, session) {
+    return Builder(
+      builder: (_) {
+        if (_isLoading) {
+          return LoadingIndicator();
+        }
+        return buildText(_);
+      },
+    );
+  }
+
+  Widget buildText(_) {
     return BodyText(title);
   }
 }

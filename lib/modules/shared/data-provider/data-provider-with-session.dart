@@ -9,14 +9,10 @@ class DataProviderWithSession extends DataProvider {
 
   void useSessionOf(BuildContext context) {
     _session = AuthenticationBloc.of(context).select(AuthenticationSelector.session);
-
-    print('Use session: $_session');
   }
 
   void useSession(Session session) {
     _session = session;
-
-    print('Use session: $_session');
   }
 
   void clearSession() {
@@ -36,8 +32,6 @@ class DataProviderWithSession extends DataProvider {
     } else {
       headers.remove('Authorization');
     }
-
-    print('User header: $headers');
 
     return headers;
   }
